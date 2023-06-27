@@ -9,30 +9,25 @@ export default function Home() {
   const inputRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState();
-  const [preferredSpec, setPreferredSpec] = useState(null);
-  const [specializations, setSpecializations] = useState(null);
 
   async function onSubmit(event) {
+    if (isLoading) return;
     event.preventDefault();
-    setPreferredSpec(null);
+
     setResult(null);
     const skills = inputRef.current.value;
-
-    if (!skills) {
-      alert("Enter your skills");
-
-      return;
-    }
 
     try {
       setIsLoading(true);
 
-      const response = await fetch("/api/suggest-fields", {
+      const response = await fetch("/api/suggest-skills", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ skills }),
+        body: JSON.stringify({
+          skills,
+        }),
       });
 
       const data = await response.json();
@@ -43,7 +38,7 @@ export default function Home() {
         );
       }
 
-      setSpecializations(data.result.specializations);
+      setResult(data.result);
     } catch (error) {
       console.error(error);
       alert(error.message);
@@ -51,7 +46,7 @@ export default function Home() {
       setIsLoading(false);
     }
   }
-
+  console.log(result);
   return (
     <div>
       <Head>
@@ -61,7 +56,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <div className={styles.formContainer}>
-          <h3>These are my skills: </h3>
+          <h3>Based on my skills: </h3>
 
           <form onSubmit={onSubmit}>
             <textarea
@@ -79,71 +74,20 @@ export default function Home() {
           </form>
         </div>
 
-        {!result && specializations?.length && !isLoading && (
-          <div>
-            <h4>Click on your preferred specialization</h4>
-            <ul>
-              {specializations.map((item) => (
-                <li
-                  className={styles.specialization}
-                  key={item}
-                  onClick={async () => {
-                    const skills = inputRef.current.value;
-                    setPreferredSpec(item);
-                    try {
-                      setIsLoading(true);
-
-                      const response = await fetch("/api/suggest-skills", {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                          skills,
-                          specialization: item,
-                        }),
-                      });
-
-                      const data = await response.json();
-                      if (response.status !== 200) {
-                        throw (
-                          data.error ||
-                          new Error(
-                            `Request failed with status ${response.status}`
-                          )
-                        );
-                      }
-
-                      setResult(data.result.suggestions);
-                    } catch (error) {
-                      console.error(error);
-                      alert(error.message);
-                    } finally {
-                      setIsLoading(false);
-                    }
-                  }}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
+        {result && !isLoading && (
+          <div className={styles.responseContainer}>
+            <h4>Recommendations</h4>
+            <ReactMarkdown>{result.recommendation}</ReactMarkdown>
           </div>
         )}
-
-        {result && preferredSpec && !isLoading && (
-          <div className={styles.responseContainer}>
-            <h4>
-              Based on your existing knowledge, here are 5 skills
-              <br /> you can learn to excel even more in {preferredSpec}
-            </h4>
-            <ol>
-              {result.map((item) => (
-                <li key={item}>
-                  <strong>{item.title}</strong>
-                  <p>{item.description}</p>
-                </li>
+        {result?.taglist && (
+          <div>
+            <h4>Tags</h4>
+            <ul className={styles.tags}>
+              {result.taglist.map((tag) => (
+                <li key={tag}>{tag}</li>
               ))}
-            </ol>
+            </ul>
           </div>
         )}
         {isLoading && <LoadingIndicator />}

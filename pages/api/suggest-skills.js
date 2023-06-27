@@ -10,22 +10,9 @@ export default async function (req, res) {
     });
     return;
   }
-  const specialization = req.body.specialization || "";
-
-  if (specialization.trim().length === 0) {
-    res.status(400).json({
-      error: {
-        message: "Please select specialization",
-      },
-    });
-    return;
-  }
 
   try {
-    const result = await openAIService.getSkillsSuggestions(
-      skills,
-      specialization
-    );
+    const result = await openAIService.getSkillsSuggestions(skills);
 
     res.status(200).json({ result });
   } catch (error) {

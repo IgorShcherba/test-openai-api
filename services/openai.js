@@ -7,132 +7,76 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const getSkillsSuggestions = async (currentSkills, specification) => {
+const getSkillsSuggestions = async (currentSkills) => {
   const allSkillsString = ALL_SKILLS.map((skill) => skill.name).join(", ");
-
+  // console.log(allSkillsString);
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo-0613",
     n: 1,
     messages: [
       {
         role: "system",
-        content: "Act as an AI mentor for a software developer",
+        content: "Act as a mentor for a software developer",
       },
       {
         role: "user",
-        content: `The desirable area/specialization is: ${specification}.
-          \nSuggest what should they learn next based on the natural progression from the existing skills.
-          \nRender suggested list into UI as html.
-          If an already acquired skill implies knowing the suggested (like e.g. Nextjs and React) - suggested should be excluded from the response. 
-          \nExclude skills that is already in the list of available ones: \n***available skills: ${currentSkills}***
-          \nSuggested list should be a subset of All skills provided below, where strictly one entry from it should represent an item of the suggested list: \n***All skills: ${allSkillsString}***`,
-      },
-    ],
-    functions: [
-      {
-        name: "renderSuggestions",
-        description:
-          "Use this function to render suggested skills and explanations of why they were chosen in UI as html tags",
-        parameters: {
-          type: "object",
-          properties: {
-            suggestions: {
-              type: "array",
-              items: {
-                type: "object",
-                description: "Suggested skill",
-                properties: {
-                  title: {
-                    type: "string",
-                    description:
-                      "Title of the suggested skill, should be in the list of all skills provided in the question",
-                  },
-                  description: {
-                    type: "string",
-                    description:
-                      "A short description (of maximum 200 characters long) of a skill",
-                  },
-                },
-              },
-              description:
-                "An array with 5 items, each element of which is a suggested skill for improvement",
-            },
-          },
-          required: ["suggestions"],
-        },
+        content: `I have a set of skills which include ${currentSkills}. What should I learn next?`,
       },
     ],
     temperature: 0.1,
     presence_penalty: 0,
     frequency_penalty: 0,
-    max_tokens: 400,
+    // max_tokens: 400,
   });
 
-  return normalizeResponse(completion);
-};
+  // console.log(normalizeResponse(completion.data.choices[0].message.content));
+  const recommendations = completion.data.choices[0].message.content;
 
-const getFieldsSuggestions = async (currentSkills) => {
-  const completion = await openai.createChatCompletion({
+  const taglistResponse = await openai.createChatCompletion({
     model: "gpt-3.5-turbo-0613",
     n: 1,
     messages: [
       {
-        role: "system",
-        content: "Act as an AI mentor for a software developer",
-      },
-      {
         role: "user",
-        content: `Based on the skillset of a mentee provided below, render a list of 3 possible specializations (e.g. Fontend, Backend, DevOps, QA engineer and others.):\n${currentSkills}`,
+        content: `From the following recommendations:  ${recommendations}
+        return a list of tags that directly match the recommendations or are related to them, considering the following list: ${allSkillsString}`,
       },
     ],
     functions: [
       {
-        name: "renderSpecializations",
-        description:
-          "Use this function to render list of specializations in UI as html tags",
+        name: "renderTaglist",
+        description: "Use this function to render a list of tags",
         parameters: {
           type: "object",
           properties: {
-            specializations: {
+            taglist: {
               type: "array",
               items: {
                 type: "string",
-                description: "Specialization title",
               },
-              description:
-                "An array where each element is a unique string representing a specialization",
             },
           },
-          required: ["specializations"],
+          required: ["taglist"],
         },
       },
     ],
     temperature: 0.1,
     presence_penalty: 0,
     frequency_penalty: 0,
-    max_tokens: 256,
+    // max_tokens: 400,
   });
-
-  return normalizeResponse(completion);
-};
-
-const normalizeResponse = (response) => {
-  let data = {};
-
-  if (response.data.choices[0].message.function_call) {
+  console.log(taglistResponse.data.choices[0].message.function_call);
+  let taglist = [];
+  if (taglistResponse.data.choices[0].message.function_call) {
     try {
-      data = JSON.parse(
-        response.data.choices[0].message.function_call?.arguments
-      );
+      taglist = JSON.parse(
+        taglistResponse.data.choices[0].message.function_call.arguments
+      ).taglist;
     } catch (error) {
-      console.log("error parsing arguments", error);
-      throw error;
+      console.log(error);
     }
-  } else {
-    data = [response.data.choices[0].message.content];
   }
-
-  return data;
+  return { recommendation: recommendations, taglist };
 };
 
-export const openAIService = { getSkillsSuggestions, getFieldsSuggestions };
+export const openAIService = { getSkillsSuggestions };
