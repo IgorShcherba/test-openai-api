@@ -22,9 +22,11 @@
 }
 .main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 60px;
+  gap:30px;
+  flex-wrap: wrap;
+  min-height:100vh;
+  padding: 2vw;
+
 }
 .main .icon {
   width: 34px;
@@ -41,18 +43,20 @@
   flex-direction: column;
   width: 320px;
 }
-.main input[type="text"] {
+.main textarea {
   padding: 12px 16px;
   border: 1px solid #10a37f;
   border-radius: 4px;
   margin-bottom: 24px;
   outline-color: #10a37f;
+  max-height: 200px;
+  max-width: 300px;
 }
 .main ::placeholder {
   color: #8e8ea0;
   opacity: 1;
 }
-.main input[type="submit"] {
+.main button{
   padding: 12px 0;
   color: #fff;
   background-color: #10a37f;
@@ -61,7 +65,21 @@
   text-align: center;
   cursor: pointer;
 }
-.main .result {
-  font-weight: bold;
-  margin-top: 40px;
+.main ol {
+  max-width:400px;
+  padding-left: 1rem;
 }
+
+.specialization {
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.formContainer {
+
+}
+
+.responseContainer {
+
+}
+
