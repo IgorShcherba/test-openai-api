@@ -46,11 +46,11 @@ export default function Home() {
       setIsLoading(false);
     }
   }
-  console.log(result);
+
   return (
     <div>
       <Head>
-        <title>OpenAI mentor</title>
+        <title>OpenAI api exploration</title>
         <link rel="icon" href="/dog.png" />
       </Head>
 

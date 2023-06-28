@@ -1,22 +1,13 @@
 import { openAIService } from "../../services/openai";
 
 export default async function (req, res) {
-  const skills = req.body.skills || "";
-  if (skills.trim().length === 0) {
-    res.status(400).json({
-      error: {
-        message: "Please enter skills",
-      },
-    });
-    return;
-  }
-
+  console.log("link param", req.body);
   try {
-    const result = await openAIService.getSkillsSuggestions(skills);
-
+    const result = await openAIService.generateTags(req.body.link);
+    console.log("result", result);
     res.status(200).json({ result });
   } catch (error) {
-    console.log(error.response);
+    console.log(error?.response);
     console.error(
       `Error with OpenAI API request: ${error.response?.data?.error?.message}`
     );
