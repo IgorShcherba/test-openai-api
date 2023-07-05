@@ -33,9 +33,7 @@ export default function Links() {
   return (
     <main className={styles.main}>
       <div className={styles.formContainer}>
-        <h3 style={{ maxWidth: 400 }}>
-          Automated Tag Generation for Web Resources
-        </h3>
+        <h3 style={{ maxWidth: 400 }}>Tags Generation</h3>
         <form onSubmit={onSubmit}>
           <input
             ref={inputRef}

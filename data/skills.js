@@ -127,10 +127,6 @@ export const ALL_SKILLS = [
     name: ".NET Framework",
   },
   {
-    id: 596,
-    name: "55555",
-  },
-  {
     id: 6,
     name: "Abstract",
   },
@@ -145,10 +141,6 @@ export const ALL_SKILLS = [
   {
     id: 8,
     name: "Acumatica Framework",
-  },
-  {
-    id: 783,
-    name: "AD Manager",
   },
   {
     id: 9,
@@ -193,10 +185,6 @@ export const ALL_SKILLS = [
   {
     id: 19,
     name: "Adobe XD",
-  },
-  {
-    id: 746,
-    name: "Advertising",
   },
   {
     id: 859,
@@ -1123,10 +1111,6 @@ export const ALL_SKILLS = [
     name: "Entity Framework",
   },
   {
-    id: 167,
-    name: "Entity Framework Core",
-  },
-  {
     id: 168,
     name: "Enzyme",
   },
@@ -1155,14 +1139,6 @@ export const ALL_SKILLS = [
     name: "Express",
   },
   {
-    id: 171,
-    name: "Express.js",
-  },
-  {
-    id: 172,
-    name: "Extreme Programming",
-  },
-  {
     id: 173,
     name: "Fabric",
   },
@@ -1183,10 +1159,6 @@ export const ALL_SKILLS = [
     name: "FBSDK",
   },
   {
-    id: 176,
-    name: "FFmpeg",
-  },
-  {
     id: 177,
     name: "Figma",
   },
@@ -1199,20 +1171,12 @@ export const ALL_SKILLS = [
     name: "Firebase",
   },
   {
-    id: 180,
-    name: "Firebase API",
-  },
-  {
     id: 181,
     name: "Firebase Authentication",
   },
   {
     id: 182,
     name: "Firebase Realtime Database",
-  },
-  {
-    id: 183,
-    name: "Firebase SDK",
   },
   {
     id: 184,
@@ -1271,10 +1235,6 @@ export const ALL_SKILLS = [
     name: "Git",
   },
   {
-    id: 705,
-    name: "Git Actions",
-  },
-  {
     id: 193,
     name: "GitHub",
   },
@@ -1331,16 +1291,8 @@ export const ALL_SKILLS = [
     name: "Google Data Studio",
   },
   {
-    id: 205,
-    name: "Google Maps",
-  },
-  {
     id: 206,
     name: "Google Maps API",
-  },
-  {
-    id: 207,
-    name: "Google Office",
   },
   {
     id: 208,
@@ -1399,24 +1351,12 @@ export const ALL_SKILLS = [
     name: "Hangfire",
   },
   {
-    id: 217,
-    name: "HashiCorp",
-  },
-  {
     id: 218,
     name: "Haxe",
   },
   {
-    id: 684,
-    name: "Healthcare and pharma",
-  },
-  {
     id: 219,
     name: "Helm",
-  },
-  {
-    id: 771,
-    name: "Helthcare",
   },
   {
     id: 220,
@@ -1579,10 +1519,6 @@ export const ALL_SKILLS = [
     name: "Java JDBC API",
   },
   {
-    id: 813,
-    name: "JavaScrip",
-  },
-  {
     id: 248,
     name: "JavaScript",
   },
@@ -1637,10 +1573,6 @@ export const ALL_SKILLS = [
   {
     id: 256,
     name: "JRuby",
-  },
-  {
-    id: 805,
-    name: "Js",
   },
   {
     id: 257,
@@ -1791,10 +1723,6 @@ export const ALL_SKILLS = [
     name: "Lit",
   },
   {
-    id: 282,
-    name: "Lodash",
-  },
-  {
     id: 773,
     name: "Logistics",
   },
@@ -1811,24 +1739,8 @@ export const ALL_SKILLS = [
     name: "Magento",
   },
   {
-    id: 767,
-    name: "Makefile",
-  },
-  {
-    id: 286,
-    name: "Management 3.0",
-  },
-  {
     id: 287,
     name: "MapboxGL",
-  },
-  {
-    id: 820,
-    name: "Mass Spectrometry",
-  },
-  {
-    id: 288,
-    name: "Material Components",
   },
   {
     id: 289,
@@ -1875,32 +1787,12 @@ export const ALL_SKILLS = [
     name: "Microservices",
   },
   {
-    id: 294,
-    name: "Microsoft Azure",
-  },
-  {
-    id: 295,
-    name: "Microsoft Excel",
-  },
-  {
-    id: 821,
-    name: "Microsoft Excel add-ins",
-  },
-  {
     id: 296,
     name: "Microsoft Office",
   },
   {
-    id: 297,
-    name: "Microsoft Outlook",
-  },
-  {
     id: 298,
     name: "Microsoft Power BI",
-  },
-  {
-    id: 299,
-    name: "Microsoft Project",
   },
   {
     id: 748,
@@ -1911,20 +1803,8 @@ export const ALL_SKILLS = [
     name: "Microsoft SQL Server",
   },
   {
-    id: 301,
-    name: "Microsoft Teams",
-  },
-  {
     id: 302,
     name: "Microsoft Test Manager",
-  },
-  {
-    id: 303,
-    name: "Microsoft Visio",
-  },
-  {
-    id: 304,
-    name: "Microsoft Visual Studio",
   },
   {
     id: 305,
@@ -1967,14 +1847,6 @@ export const ALL_SKILLS = [
     name: "Mongoose",
   },
   {
-    id: 314,
-    name: "Moq",
-  },
-  {
-    id: 315,
-    name: "Moya",
-  },
-  {
     id: 749,
     name: "MS Azure",
   },
@@ -1997,10 +1869,6 @@ export const ALL_SKILLS = [
   {
     id: 318,
     name: "MVVM",
-  },
-  {
-    id: 634,
-    name: "my",
   },
   {
     id: 319,
@@ -2097,14 +1965,6 @@ export const ALL_SKILLS = [
   {
     id: 336,
     name: "Objective-C",
-  },
-  {
-    id: 337,
-    name: "Objective-C Runtime",
-  },
-  {
-    id: 338,
-    name: "ObjectMapper",
   },
   {
     id: 639,
@@ -2227,20 +2087,12 @@ export const ALL_SKILLS = [
     name: "PHP Unit",
   },
   {
-    id: 358,
-    name: "PhpStorm",
-  },
-  {
     id: 359,
     name: "PHPUnit",
   },
   {
     id: 360,
     name: "Pixi.js",
-  },
-  {
-    id: 361,
-    name: "Planning Poker Tools",
   },
   {
     id: 851,
@@ -2287,10 +2139,6 @@ export const ALL_SKILLS = [
     name: "Primefaces",
   },
   {
-    id: 370,
-    name: "Prism",
-  },
-  {
     id: 785,
     name: "Prisma",
   },
@@ -2307,20 +2155,8 @@ export const ALL_SKILLS = [
     name: "Product management",
   },
   {
-    id: 691,
-    name: "Professional services",
-  },
-  {
-    id: 740,
-    name: "Project Managment",
-  },
-  {
     id: 574,
     name: "Prometeus",
-  },
-  {
-    id: 803,
-    name: "Prototyping",
   },
   {
     id: 371,
@@ -2381,10 +2217,6 @@ export const ALL_SKILLS = [
   {
     id: 379,
     name: "RabbitMQ",
-  },
-  {
-    id: 380,
-    name: "Ramda",
   },
   {
     id: 703,
@@ -2495,10 +2327,6 @@ export const ALL_SKILLS = [
     name: "RequireJS",
   },
   {
-    id: 726,
-    name: "Researching",
-  },
-  {
     id: 403,
     name: "REST API",
   },
@@ -2509,10 +2337,6 @@ export const ALL_SKILLS = [
   {
     id: 405,
     name: "RESTful WebServices",
-  },
-  {
-    id: 695,
-    name: "Retail and consumer goods",
   },
   {
     id: 406,
@@ -2527,10 +2351,6 @@ export const ALL_SKILLS = [
     name: "Retromat.org",
   },
   {
-    id: 849,
-    name: "Retrospective Tools",
-  },
-  {
     id: 409,
     name: "Rhinoceros 3D",
   },
@@ -2541,14 +2361,6 @@ export const ALL_SKILLS = [
   {
     id: 411,
     name: "Robo 3T",
-  },
-  {
-    id: 412,
-    name: "Robolectric",
-  },
-  {
-    id: 413,
-    name: "Room",
   },
   {
     id: 648,
@@ -2615,10 +2427,6 @@ export const ALL_SKILLS = [
     name: "Sails.js",
   },
   {
-    id: 742,
-    name: "Sales management",
-  },
-  {
     id: 649,
     name: "Salesforce",
   },
@@ -2641,10 +2449,6 @@ export const ALL_SKILLS = [
   {
     id: 428,
     name: "Scrum",
-  },
-  {
-    id: 651,
-    name: "Scrum Master",
   },
   {
     id: 429,
@@ -2687,10 +2491,6 @@ export const ALL_SKILLS = [
     name: "Serverless",
   },
   {
-    id: 745,
-    name: "Service desk",
-  },
-  {
     id: 654,
     name: "Servlets",
   },
@@ -2709,18 +2509,6 @@ export const ALL_SKILLS = [
   {
     id: 437,
     name: "SignalR",
-  },
-  {
-    id: 438,
-    name: "Sketch",
-  },
-  {
-    id: 728,
-    name: "Skype",
-  },
-  {
-    id: 439,
-    name: "Slack",
   },
   {
     id: 440,
@@ -2745,10 +2533,6 @@ export const ALL_SKILLS = [
   {
     id: 444,
     name: "SOAP",
-  },
-  {
-    id: 781,
-    name: "Social Networks",
   },
   {
     id: 445,
@@ -2829,26 +2613,6 @@ export const ALL_SKILLS = [
   {
     id: 570,
     name: "SQL DB",
-  },
-  {
-    id: 457,
-    name: "SQL Server Analysis Services",
-  },
-  {
-    id: 458,
-    name: "SQL Server Integration Services",
-  },
-  {
-    id: 459,
-    name: "SQL Server Management Studio",
-  },
-  {
-    id: 460,
-    name: "SQL Server Reporting Services",
-  },
-  {
-    id: 461,
-    name: "SQLAlchemy ORM",
   },
   {
     id: 462,
@@ -3063,20 +2827,12 @@ export const ALL_SKILLS = [
     name: "Ubuntu",
   },
   {
-    id: 502,
-    name: "UIKit",
-  },
-  {
     id: 503,
     name: "UiPath",
   },
   {
     id: 504,
     name: "UML",
-  },
-  {
-    id: 505,
-    name: "Underscore.js",
   },
   {
     id: 582,
@@ -3089,34 +2845,6 @@ export const ALL_SKILLS = [
   {
     id: 662,
     name: "Unity 3D",
-  },
-  {
-    id: 507,
-    name: "Universal Windows Platform",
-  },
-  {
-    id: 508,
-    name: "Unix",
-  },
-  {
-    id: 801,
-    name: "Use cases and scenarios",
-  },
-  {
-    id: 707,
-    name: "User stories",
-  },
-  {
-    id: 509,
-    name: "Vagrant",
-  },
-  {
-    id: 510,
-    name: "Vapor",
-  },
-  {
-    id: 823,
-    name: "vault",
   },
   {
     id: 579,
@@ -3145,10 +2873,6 @@ export const ALL_SKILLS = [
   {
     id: 514,
     name: "Visual Basic .NET",
-  },
-  {
-    id: 515,
-    name: "Visual Studio Code",
   },
   {
     id: 516,
@@ -3183,10 +2907,6 @@ export const ALL_SKILLS = [
     name: "Vue",
   },
   {
-    id: 519,
-    name: "Vue.js",
-  },
-  {
     id: 762,
     name: "WaaS",
   },
@@ -3197,14 +2917,6 @@ export const ALL_SKILLS = [
   {
     id: 521,
     name: "Waterfall",
-  },
-  {
-    id: 522,
-    name: "Web API",
-  },
-  {
-    id: 583,
-    name: "Web components",
   },
   {
     id: 523,
@@ -3231,52 +2943,8 @@ export const ALL_SKILLS = [
     name: "WebSocket",
   },
   {
-    id: 529,
-    name: "WebStorm",
-  },
-  {
-    id: 774,
-    name: "Wholesale",
-  },
-  {
-    id: 530,
-    name: "WinAppDriver",
-  },
-  {
-    id: 531,
-    name: "Windows",
-  },
-  {
-    id: 532,
-    name: "Windows Forms",
-  },
-  {
-    id: 533,
-    name: "Windows Presentation Foundation",
-  },
-  {
-    id: 589,
-    name: "Wireframes",
-  },
-  {
-    id: 841,
-    name: "WiX Toolset",
-  },
-  {
     id: 534,
     name: "WordPress",
-  },
-  {
-    id: 850,
-    name: "Work Breakout Structure",
-  },
-  {
-    id: 535,
-    name: "WorkFusion",
-  },
-  {
-    id: 800,
-    name: "Workshops",
   },
   {
     id: 536,
