@@ -1,8 +1,8 @@
-import Head from "next/head";
 import { useRef, useState } from "react";
 import styles from "./index.module.css";
-import ReactMarkdown from "react-markdown";
+
 import { LoadingIndicator } from "../components/LoadingIndicator";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 export default function Links() {
   const [result, setResult] = useState();
@@ -48,7 +48,18 @@ export default function Links() {
 
       {result && !isLoading && (
         <div className={styles.responseContainer}>
-          <ReactMarkdown>{result}</ReactMarkdown>
+          <h4>Course Summary:</h4>
+          <ReactMarkdown>{result.courseSummary.data.content}</ReactMarkdown>
+          {result.taglist && (
+            <div>
+              <h4>Tags</h4>
+              <ul className={styles.tags}>
+                {result.taglist.map((tag) => (
+                  <li key={tag}>{tag}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
       {isLoading && <LoadingIndicator />}

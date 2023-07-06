@@ -1,10 +1,18 @@
+import { udemyService } from "../../services/metadata";
 import { openAIService } from "../../services/openai";
 
 export default async function (req, res) {
   console.log("link param", req.body);
   try {
-    const result = await openAIService.generateTags(req.body.link);
-    console.log("result", result);
+    const metadata = await udemyService.getCourseMetadata(req.body.link);
+    const courseCurriculum = await udemyService.getCourseCurriculum(
+      metadata.id
+    );
+    const result = await openAIService.generateTags(
+      metadata.title,
+      courseCurriculum
+    );
+
     res.status(200).json({ result });
   } catch (error) {
     console.log(error?.response);

@@ -1,10 +1,5 @@
-import {
-  ChatCompletionRequestMessageRoleEnum,
-  Configuration,
-  OpenAIApi,
-} from "openai";
-import { ALL_SKILLS, ALL_SKILLS_NORMALIZED } from "../data/skills";
-import { linkPreviewService } from "./metadata";
+import { ALL_SKILLS_NORMALIZED } from "../data/skills";
+
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import {
   HumanChatMessage,
@@ -82,7 +77,7 @@ const getSkillsSuggestions = async (currentSkills) => {
   //   taglist,
   //   tagsExtracted: taglist.length,
   //   tagsFromAllSkillsDataset,
-  //   tagsFromAllSkillsDatase`tCount: tagsFromAllSkillsDataset.length,
+  //   tagsFromAllSkillsDatasetCount: tagsFromAllSkillsDataset.length,
   // });
 
   return {
@@ -91,104 +86,50 @@ const getSkillsSuggestions = async (currentSkills) => {
   };
 };
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+const chat2 = new ChatOpenAI({
+  modelName: "gpt-3.5-turbo-0613",
+  temperature: 0,
+  maxTokens: 1000,
+  topP: 0,
+  frequencyPenalty: 0,
+  presencePenalty: 0,
 });
 
-const openai = new OpenAIApi(configuration);
+async function generateTags(title: string, curriculum: any[]) {
+  console.log(JSON.stringify(curriculum.map((item) => item.title).join("\n")));
 
-async function parseMetadata(link) {
-  try {
-    const response = await linkPreviewService.getMetadata(link);
+  const summarizeCourcePrompt = new HumanChatMessage(
+    `Provide a short summary (2 sentences long) of the main subject matter based on the course curriculum below:
+    \n Title: ${title}
+    \n Curriculum: ${JSON.stringify(
+      curriculum.map((item, i) => `${i}.${item.title}`).join("\n")
+    )}`
+  );
 
-    return JSON.stringify({
-      title: response.data.title,
-      description: response.data.description,
-      headline: response.data.headline,
-    });
-  } catch (error) {
-    console.log("linkPreviewService error", JSON.stringify(error, null, 2));
-  }
-}
+  const summarizeCourcePrompt1 = new HumanChatMessage(
+    `Provide a short summary (2 sentences long) of the main subject matter based on the course curriculum below:
+    \n Title: ${title}`
+  );
+  const completion1 = await chat2.call([summarizeCourcePrompt]);
+  const courceSummary = new AIChatMessage(completion1.text);
+  console.log("summary", courceSummary);
+  const extractTagsPrompt = new HumanChatMessage(
+    `return as a bullet list only those items from the list provided below that are related to the course summary
+    \n ${JSON.stringify(ALL_SKILLS_NORMALIZED)}`
+  );
+  const completion2 = await chat2.call([courceSummary, extractTagsPrompt]);
+  console.log(completion2);
+  const taglist = parseBulletListResponse(completion2.text);
+  const tagsFromAllSkillsDataset = extractTechnologies(taglist);
 
-async function generateTags(url) {
-  // Step 1: send the conversation and available functions to GPT
-  let messages = [
-    {
-      role: ChatCompletionRequestMessageRoleEnum.User,
-      content: `Parse its meta tags of a website:${url} and return only technologies from the list: ${JSON.stringify(
-        ALL_SKILLS_NORMALIZED
-      )} that are related to the webpage's title, description or headline. Return them in bullet list format`,
-    },
-  ];
-  let functions = [
-    {
-      name: "parse_metadata",
-      description: "Get the metadata of the given website",
-      parameters: {
-        type: "object",
-        properties: {
-          link: {
-            type: "string",
-            description: "URL of a website",
-          },
-        },
-        required: ["link"],
-      },
-    },
-  ];
-
-  let response = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo-0613",
-    messages,
-    functions: functions,
-    function_call: "auto",
-    temperature: 0.2,
+  console.log({
+    taglist,
+    tagsExtracted: taglist.length,
+    tagsFromAllSkillsDataset,
+    tagsFromAllSkillsDatasetCount: tagsFromAllSkillsDataset.length,
   });
 
-  let responseMessage = response.data.choices[0].message;
-
-  // Step 2: check if GPT wanted to call a function
-  if ("function_call" in responseMessage) {
-    // Step 3: call the function
-    let availableFunctions = {
-      parse_metadata: parseMetadata,
-    };
-
-    let functionName = responseMessage.function_call.name;
-    let functionToCall = availableFunctions[functionName];
-    let functionArgs = JSON.parse(responseMessage.function_call.arguments);
-
-    let functionResponse = await functionToCall(functionArgs.link);
-
-    // Step 4: send the info on the function call and function response to GPT
-    messages.push(responseMessage); // extend conversation with assistant's reply
-    messages.push({
-      role: ChatCompletionRequestMessageRoleEnum.Function,
-      name: functionName,
-      content: functionResponse,
-    }); // extend conversation with function response
-
-    let secondResponse = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo-0613",
-      messages,
-      temperature: 0,
-    }); // get a new response from GPT where it can see the function response
-
-    let taglist = [];
-    if (secondResponse.data.choices[0].message.function_call) {
-      try {
-        taglist = JSON.parse(
-          secondResponse.data.choices[0].message.function_call.arguments
-        ).tags;
-      } catch (error) {
-        console.log(error);
-      }
-      return { taglist };
-    } else {
-      return secondResponse.data.choices[0].message.content;
-    }
-  }
+  return { taglist: tagsFromAllSkillsDataset, courseSummary: completion1 };
 }
 
 export const openAIService = { getSkillsSuggestions, generateTags };
